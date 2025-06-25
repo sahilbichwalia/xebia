@@ -70,6 +70,33 @@ Open `readmegenerate.ipynb` in Jupyter Notebook, JupyterLab, or VS Code and run 
 | Recall     | 92.1%  |
 | F1 Score   | 90.3%  |
 
+## 4 🧠 Trained Models
+
+This repository includes pre-trained components:
+
+- `best_random_forest_model.pkl` – Serialized Random Forest model trained on the medicine quality dataset
+- `label_encoder.pkl` – LabelEncoder instance used to transform target labels (`"Safe"` ↔ `1`, `"Not Safe"` ↔ `0`)
+
+To use them:
+
+```python
+import pickle
+
+# Load model
+with open("best_random_forest_model.pkl", "rb") as f:
+    model = pickle.load(f)
+
+# Load label encoder
+with open("label_encoder.pkl", "rb") as f:
+    le = pickle.load(f)
+
+# Example prediction
+X_sample = df.drop("Safe/Not Safe", axis=1).iloc[[0]]
+y_pred = model.predict(X_sample)
+print("Predicted label:", le.inverse_transform(y_pred))
+```
+
+
 
 ## 🤝 Contributors
 - **[Sushant Shekhar](https://github.com/Jhasushant99)**
